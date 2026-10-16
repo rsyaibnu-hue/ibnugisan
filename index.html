@@ -1,84 +1,1097 @@
-
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark" data-theme="blue">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101827">
-  <title>Ibnu Gisan — My Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ibnu Gisan | Digital Explorer & Tech Lab</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    * { box-sizing: border-box; }
+    /* CSS Variables untuk Tema Warna */
+    :root[data-theme="blue"] {
+      --accent-primary: #3b82f6;
+      --accent-secondary: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.4);
+      --accent-gradient: linear-gradient(135deg, #3b82f6, #06b6d4);
+      --border-glow: rgba(59, 130, 246, 0.3);
+    }
+
+    :root[data-theme="purple"] {
+      --accent-primary: #a855f7;
+      --accent-secondary: #ec4899;
+      --accent-glow: rgba(168, 85, 247, 0.4);
+      --accent-gradient: linear-gradient(135deg, #a855f7, #ec4899);
+      --border-glow: rgba(168, 85, 247, 0.3);
+    }
+
+    :root[data-theme="emerald"] {
+      --accent-primary: #10b981;
+      --accent-secondary: #14b8a6;
+      --accent-glow: rgba(16, 185, 129, 0.4);
+      --accent-gradient: linear-gradient(135deg, #10b981, #14b8a6);
+      --border-glow: rgba(16, 185, 129, 0.3);
+    }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      background: #101827;
-      color: #f8fafc;
-      font-family: -apple-system, Arial, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #030712;
+      color: #f3f4f6;
+      overflow-x: hidden;
+      user-select: none;
     }
 
-    main {
-      width: 100%;
-      max-width: 560px;
-      padding: 36px 24px;
-      text-align: center;
-      border: 1px solid #334155;
-      border-radius: 24px;
-      background: #172235;
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #030712;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
     }
 
-    .tag {
-      color: #7dd3fc;
-      letter-spacing: 3px;
-      font-size: 12px;
+    /* Utility Classes */
+    .theme-text {
+      color: var(--accent-primary);
     }
 
-    h1 {
-      font-size: clamp(36px, 10vw, 56px);
-      margin: 20px 0 12px;
+    .theme-gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    p {
-      color: #cbd5e1;
-      line-height: 1.7;
+    .theme-bg {
+      background-color: var(--accent-primary);
     }
 
-    button {
-      margin-top: 18px;
-      padding: 13px 22px;
-      border: 0;
-      border-radius: 12px;
-      background: #38bdf8;
-      color: #082f49;
-      font-weight: bold;
-      font-size: 16px;
+    .theme-border {
+      border-color: var(--border-glow);
     }
 
-    #message { color: #7dd3fc; }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card-hover:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px -10px var(--accent-glow);
+    }
+
+    /* 3D Tilt Card Container */
+    .tilt-card-wrapper {
+      perspective: 1000px;
+    }
+
+    .tilt-card {
+      transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    /* Synth Key Press Effect */
+    .synth-key {
+      transition: all 0.1s ease;
+    }
+    .synth-key:active, .synth-key.active {
+      transform: scale(0.92) translateY(2px);
+      box-shadow: 0 0 20px var(--accent-primary);
+      background-color: var(--accent-primary) !important;
+      color: #000 !important;
+    }
+
+    /* Pulse Glow */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
+      50% { box-shadow: 0 0 30px var(--accent-glow); }
+    }
+    .animate-glow {
+      animation: pulse-glow 3s infinite ease-in-out;
+    }
   </style>
 </head>
-<body>
-  <main>
-    <div class="tag">WELCOME TO MY WEBSITE</div>
-    <h1>Hi, I'm Ibnu.</h1>
-    <p>
-      Ini website pribadiku.
-      Tempatku belajar, berkarya, dan
-      membangun sesuatu di internet.
-    </p>
-    <button id="helloButton">Klik aku ✨</button>
-    <p id="message" aria-live="polite"></p>
+<body class="min-h-screen relative flex flex-col justify-between">
+
+  <!-- Background Canvas (Particle Constellation Network) -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Particle Burst Overlay Canvas -->
+  <canvas id="burst-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-40 w-full px-4 py-3">
+    <div class="max-w-6xl mx-auto glass-card rounded-2xl px-5 py-3 flex items-center justify-between shadow-lg">
+      
+      <!-- Brand / Identity -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl theme-bg flex items-center justify-center font-bold text-slate-950 text-lg shadow-md group-hover:scale-105 transition-transform">
+          IG
+        </div>
+        <div class="flex flex-col">
+          <span class="font-bold text-slate-100 tracking-wide text-sm md:text-base">ibnugisan.my.id</span>
+          <span class="text-[10px] text-slate-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Interactive Lab
+          </span>
+        </div>
+      </a>
+
+      <!-- Quick Actions & Theme Switcher -->
+      <div class="flex items-center gap-2 md:gap-4">
+        
+        <!-- Theme Switcher Selector -->
+        <div class="flex items-center bg-slate-900/80 p-1 rounded-xl border border-white/10 gap-1">
+          <button onclick="setTheme('blue')" title="Cyber Blue" class="w-7 h-7 rounded-lg bg-cyan-500/20 border border-cyan-400/40 hover:scale-110 transition-all flex items-center justify-center text-xs text-cyan-400">
+            <i class="fa-solid fa-droplet"></i>
+          </button>
+          <button onclick="setTheme('purple')" title="Electric Purple" class="w-7 h-7 rounded-lg bg-purple-500/20 border border-purple-400/40 hover:scale-110 transition-all flex items-center justify-center text-xs text-purple-400">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </button>
+          <button onclick="setTheme('emerald')" title="Matrix Emerald" class="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-400/40 hover:scale-110 transition-all flex items-center justify-center text-xs text-emerald-400">
+            <i class="fa-solid fa-bolt"></i>
+          </button>
+        </div>
+
+        <!-- Social Connect Button -->
+        <button onclick="copyCurrentURL(event)" class="particle-btn hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-white/10 transition-all">
+          <i class="fa-regular fa-share-from-square"></i> Bagikan
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="relative z-10 max-w-5xl mx-auto px-4 py-8 space-y-12">
+
+    <!-- HERO SECTION: 3D Tilt Card -->
+    <section class="tilt-card-wrapper">
+      <div id="hero-card" class="tilt-card glass-card rounded-3xl p-6 md:p-10 text-center relative overflow-hidden shadow-2xl border border-white/10">
+        
+        <!-- Ambient Glowing Sphere in Card Background -->
+        <div class="absolute -top-24 -left-24 w-60 h-60 rounded-full theme-bg opacity-20 filter blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-60 h-60 rounded-full theme-bg opacity-20 filter blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+          
+          <!-- Live Status Tag -->
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-emerald-500/30 text-emerald-400 text-xs font-medium shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Open for Collaboration & Projects</span>
+          </div>
+
+          <!-- Avatar / Profile Symbol -->
+          <div class="relative inline-block my-2">
+            <div class="w-28 h-28 md:w-32 md:h-32 rounded-3xl theme-bg p-1 mx-auto shadow-2xl animate-glow">
+              <div class="w-full h-full bg-slate-950 rounded-[22px] flex flex-col items-center justify-center relative overflow-hidden">
+                <i class="fa-solid fa-laptop-code text-4xl md:text-5xl theme-text"></i>
+                <span class="text-[10px] tracking-widest uppercase font-bold text-slate-400 mt-2">Dev & Audio</span>
+              </div>
+            </div>
+            <div class="absolute -bottom-2 -right-2 w-9 h-9 rounded-xl bg-slate-900 border border-white/20 flex items-center justify-center text-amber-400 text-sm shadow-md">
+              ⚡
+            </div>
+          </div>
+
+          <!-- Title & Typewriter -->
+          <div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-100 tracking-tight">
+              Halo, Saya <span class="theme-gradient-text">Ibnu Gisan</span>
+            </h1>
+            <div class="h-8 mt-2 flex items-center justify-center">
+              <p class="text-base sm:text-lg text-slate-300 font-medium">
+                <span id="typewriter" class="theme-text font-semibold"></span>
+                <span class="animate-pulse theme-text font-bold">|</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Brief Bio -->
+          <p class="text-sm md:text-base text-slate-400 leading-relaxed max-w-xl mx-auto">
+            Selamat datang di ruang eksperimen digital pribadi saya. Di sini saya mengeksplorasi pembuatan web modern, antarmuka interaktif, dan eksperimen audio berbasis browser.
+          </p>
+
+          <!-- Interactive Action Buttons -->
+          <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+            <a href="#sound-lab" class="particle-btn px-6 py-3 rounded-2xl theme-bg text-slate-950 font-bold text-sm shadow-lg hover:opacity-90 hover:scale-105 transition-all flex items-center gap-2">
+              <i class="fa-solid fa-compact-disc"></i> Buka Sound Lab
+            </a>
+            <a href="#showcase" class="particle-btn px-6 py-3 rounded-2xl bg-slate-800/90 border border-white/10 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition-all flex items-center gap-2">
+              <i class="fa-solid fa-cubes"></i> Eksplor Karya
+            </a>
+            <button onclick="copyEmail(event)" class="particle-btn p-3 rounded-2xl bg-slate-800/90 border border-white/10 hover:bg-slate-700 text-slate-200 text-sm transition-all" title="Salin Email">
+              <i class="fa-regular fa-envelope"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SOUND LAB & AUDIO VISUALIZER SECTION -->
+    <section id="sound-lab" class="space-y-4">
+      <div class="flex items-center justify-between px-2">
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+            <i class="fa-solid fa-sliders theme-text"></i>
+            <span>Ibnu's Sound Lab</span>
+          </h2>
+          <p class="text-xs text-slate-400">Synthesizer real-time & Audio Spectrum Visualizer interaktif</p>
+        </div>
+        <span class="text-xs px-3 py-1 rounded-full bg-slate-800 border border-white/10 text-slate-300">
+          Web Audio API
+        </span>
+      </div>
+
+      <div class="glass-card rounded-3xl p-5 md:p-6 space-y-6">
+        
+        <!-- Real-Time Audio Visualizer Canvas -->
+        <div class="relative w-full h-36 md:h-44 rounded-2xl bg-slate-950/80 border border-white/10 overflow-hidden flex items-center justify-center">
+          <canvas id="visualizer-canvas" class="w-full h-full"></canvas>
+          <div id="visualizer-hint" class="absolute inset-0 flex items-center justify-center pointer-events-none text-slate-500 text-xs font-medium gap-2">
+            <i class="fa-solid fa-music animate-bounce"></i> Tekan tuts synth di bawah untuk memainkan nada
+          </div>
+        </div>
+
+        <!-- Synthesizer Touch Pads / Notes -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+            <span><i class="fa-solid fa-keyboard"></i> Tangga Nada Melodi (Do-Re-Mi)</span>
+            <span class="text-[11px] text-slate-500">Sentuh / Klik</span>
+          </div>
+
+          <!-- Note Pads Grid -->
+          <div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
+            <button onclick="playSynthNote(261.63, 'C4', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">Do</span>
+              <span class="text-sm theme-text">C4</span>
+            </button>
+            <button onclick="playSynthNote(293.66, 'D4', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">Re</span>
+              <span class="text-sm theme-text">D4</span>
+            </button>
+            <button onclick="playSynthNote(329.63, 'E4', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">Mi</span>
+              <span class="text-sm theme-text">E4</span>
+            </button>
+            <button onclick="playSynthNote(349.23, 'F4', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">Fa</span>
+              <span class="text-sm theme-text">F4</span>
+            </button>
+            <button onclick="playSynthNote(392.00, 'G4', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">Sol</span>
+              <span class="text-sm theme-text">G4</span>
+            </button>
+            <button onclick="playSynthNote(440.00, 'A4', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">La</span>
+              <span class="text-sm theme-text">A4</span>
+            </button>
+            <button onclick="playSynthNote(493.88, 'B4', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">Si</span>
+              <span class="text-sm theme-text">B4</span>
+            </button>
+            <button onclick="playSynthNote(523.25, 'C5', event)" class="synth-key py-4 rounded-xl bg-slate-900 border border-white/10 text-slate-200 font-bold text-center flex flex-col items-center justify-center gap-1 hover:border-slate-500">
+              <span class="text-xs text-slate-400">Do'</span>
+              <span class="text-sm theme-text">C5</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Ambient Soundscape Loop Control -->
+        <div class="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <button id="ambient-toggle-btn" onclick="toggleAmbientLoop(event)" class="particle-btn px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 flex items-center gap-2 transition-all">
+              <i class="fa-solid fa-play text-emerald-400" id="ambient-icon"></i>
+              <span id="ambient-text">Putar Ambient Chill Loop</span>
+            </button>
+            <span class="text-[11px] text-slate-400 hidden sm:inline">Generative procedural soundscape</span>
+          </div>
+
+          <!-- Waveform Selector -->
+          <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-white/10 text-xs">
+            <button onclick="setSynthWave('sine')" id="wave-sine" class="px-2.5 py-1 rounded-lg bg-slate-800 theme-text font-medium text-[11px]">Sine</button>
+            <button onclick="setSynthWave('triangle')" id="wave-triangle" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 font-medium text-[11px]">Triangle</button>
+            <button onclick="setSynthWave('square')" id="wave-square" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 font-medium text-[11px]">Square</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SHOWCASE SECTION: Projects, Skills & Hobbies -->
+    <section id="showcase" class="space-y-6">
+      
+      <!-- Section Header & Filter Tabs -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold flex items-center gap-2">
+            <i class="fa-solid fa-layer-group theme-text"></i>
+            <span>Showcase & Portfolio</span>
+          </h2>
+          <p class="text-xs text-slate-400">Proyek, keahlian, dan minat yang sedang ditekuni</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-2xl border border-white/10 text-xs">
+          <button onclick="filterShowcase('all')" id="filter-all" class="filter-btn active px-3 py-1.5 rounded-xl theme-bg text-slate-950 font-bold transition-all">Semua</button>
+          <button onclick="filterShowcase('project')" id="filter-project" class="filter-btn px-3 py-1.5 rounded-xl text-slate-400 hover:text-slate-200 font-semibold transition-all">Proyek</button>
+          <button onclick="filterShowcase('skill')" id="filter-skill" class="filter-btn px-3 py-1.5 rounded-xl text-slate-400 hover:text-slate-200 font-semibold transition-all">Skills</button>
+          <button onclick="filterShowcase('hobby')" id="filter-hobby" class="filter-btn px-3 py-1.5 rounded-xl text-slate-400 hover:text-slate-200 font-semibold transition-all">Minat</button>
+        </div>
+      </div>
+
+      <!-- Showcase Cards Grid -->
+      <div id="showcase-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        
+        <!-- Card 1: Custom Domain & Pages -->
+        <div class="showcase-card glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between space-y-4" data-category="project">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-globe"></i>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                Proyek Web
+              </span>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">ibnugisan.my.id Deployment</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Konfigurasi custom domain pribadi di GitHub Pages dengan optimasi SSL/HTTPS dan DNS manajemen.
+            </p>
+          </div>
+          <button onclick="openModal('ibnugisan.my.id Deployment', 'Proyek konfigurasi domain pribadi menggunakan GitHub Pages, DNS A Record & CNAME IDwebhost, serta penerapan HTTPS/SSL terenkripsi otomatis.', 'GitHub Pages, Custom Domain, DNS Management, Cloudflare/GitHub Edge', 'https://ibnugisan.my.id')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> Detail Proyek
+          </button>
+        </div>
+
+        <!-- Card 2: Interactive Web Audio Synthesizer -->
+        <div class="showcase-card glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between space-y-4" data-category="project">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-wave-square"></i>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                Audio & Web
+              </span>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Web Audio Synthesizer</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Aplikasi pembuat musik digital sederhana memanfaatkan Web Audio API browser tanpa dependensi file audio luar.
+            </p>
+          </div>
+          <button onclick="openModal('Web Audio Synthesizer', 'Aplikasi synthesizer interaktif yang menghasilkan gelombang suara murni (Sine, Triangle, Square) dan menampilkan visualisasi spektrum frekuensi audio secara real-time pada Canvas.', 'JavaScript (ES6+), Web Audio API, Canvas HTML5, CSS Animations', '#sound-lab')" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> Detail Proyek
+          </button>
+        </div>
+
+        <!-- Card 3: Modern Frontend Development -->
+        <div class="showcase-card glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between space-y-4" data-category="skill">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg">
+                <i class="fa-code text-emerald-400"></i>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                Keahlian Utama
+              </span>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Frontend Architecture</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Pengembangan antarmuka web yang responsif, cepat, serta berfokus pada pengalaman pengguna yang halus (UI/UX).
+            </p>
+          </div>
+          <button onclick="openModal('Frontend Architecture', 'Menguasai pembuatan tampilan web yang adaptif untuk perangkat HP maupun laptop. Terbiasa menggunakan utility framework modern seperti Tailwind CSS, manipulasi DOM interaktif, dan animasi halus.', 'HTML5, CSS3, JavaScript, Tailwind CSS, UI/UX Design Principles', null)" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> Detail Skill
+          </button>
+        </div>
+
+        <!-- Card 4: Particle Canvas & Visual Effect -->
+        <div class="showcase-card glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between space-y-4" data-category="skill">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                Keahlian Grafik
+              </span>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Canvas 2D & VFX Animation</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Membuat efek visual animasi latar belakang, konstelasi partikel, dan animasi ledakan interaktif berbasis HTML5 Canvas.
+            </p>
+          </div>
+          <button onclick="openModal('Canvas 2D & VFX Animation', 'Pengalaman merancang efek partikel fisik, sistem matematika jarak untuk efek konstelasi, serta penanganan event touch & mouse listener untuk reaksi real-time di layar.', 'HTML5 Canvas API, JavaScript Physics Math, RequestAnimationFrame Optimization', null)" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> Detail Skill
+          </button>
+        </div>
+
+        <!-- Card 5: Audio Production & Sound Design -->
+        <div class="showcase-card glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between space-y-4" data-category="hobby">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-headphones"></i>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-300 border border-rose-500/20">
+                Minat & Hobi
+              </span>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Audio Engineering & Tech</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Eksplorasi pengolahan sinyal suara digital, desain gelombang nada synthesizer, dan ritme musik elektronik.
+            </p>
+          </div>
+          <button onclick="openModal('Audio Engineering & Tech', 'Tertarik pada penggabungan teknologi dan musik. Suka mengeksplorasi sound design, sintesis nada, instrumen virtual, serta pengolahan audio berbasis software.', 'Sound Synthesis, Digital Audio Workstation, Audio Frequency Analysis', null)" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> Detail Minat
+          </button>
+        </div>
+
+        <!-- Card 6: Continuous Learning & Exploration -->
+        <div class="showcase-card glass-card glass-card-hover rounded-2xl p-5 flex flex-col justify-between space-y-4" data-category="hobby">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-lg">
+                <i class="fa-solid fa-rocket"></i>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                Eksplorasi
+              </span>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Building in Public</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Suka mencoba teknologi pemrograman baru, membagikan proses belajar, dan mengunggah karya langsung ke internet.
+            </p>
+          </div>
+          <button onclick="openModal('Building in Public', 'Prinsip selalu belajar hal baru di dunia teknologi web, open source, dan deployment independen menggunakan tools modern.', 'Git Version Control, GitHub Pages, Web Innovations, Open Learning', null)" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-circle-info"></i> Detail
+          </button>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
+  <!-- Footer & Social Links -->
+  <footer class="relative z-10 w-full mt-16 border-t border-white/10 bg-slate-950/80 backdrop-blur-lg">
+    <div class="max-w-5xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      
+      <!-- Footer Identity -->
+      <div class="space-y-1">
+        <div class="font-bold text-slate-200 text-base flex items-center justify-center md:justify-start gap-2">
+          <span>ibnugisan.my.id</span>
+          <span class="text-xs font-normal text-slate-500">— Personal Digital Space</span>
+        </div>
+        <p class="text-xs text-slate-400">Dibuat dengan semangat kreativitas, HTML, CSS, & Web Audio API.</p>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/rsyaibnu-hue" target="_blank" rel="noopener noreferrer" class="particle-btn w-10 h-10 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-slate-500 transition-all" title="GitHub">
+          <i class="fa-brands fa-github text-lg"></i>
+        </a>
+        <button onclick="copyCurrentURL(event)" class="particle-btn w-10 h-10 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-slate-500 transition-all" title="Bagikan Web">
+          <i class="fa-solid fa-link text-base"></i>
+        </button>
+        <button onclick="copyEmail(event)" class="particle-btn w-10 h-10 rounded-xl bg-slate-900 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:border-slate-500 transition-all" title="Email Kontak">
+          <i class="fa-regular fa-envelope text-base"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Copyright Tagline -->
+    <div class="py-3 border-t border-white/5 text-center text-[11px] text-slate-400">
+      &copy; <span id="year-text">2026</span> Ibnu Gisan. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- MODAL POPUP (Detail Item Showcase) -->
+  <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-card max-w-lg w-full rounded-3xl p-6 space-y-5 border border-white/20 shadow-2xl relative transform scale-95 transition-transform duration-300" id="modal-content">
+      
+      <!-- Modal Close Button -->
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Modal Title -->
+      <div class="space-y-1">
+        <h3 id="modal-title" class="text-xl font-bold theme-text">Judul Detail</h3>
+        <span class="text-[11px] text-slate-400">Informasi Lengkap</span>
+      </div>
+
+      <!-- Modal Description -->
+      <p id="modal-desc" class="text-sm text-slate-300 leading-relaxed">
+        Deskripsi detail akan muncul di sini.
+      </p>
+
+      <!-- Modal Tech Stack Badges -->
+      <div class="space-y-1.5">
+        <span class="text-xs font-semibold text-slate-400">Teknologi / Tag:</span>
+        <div id="modal-tech" class="text-xs text-emerald-400 font-mono bg-slate-900/90 p-3 rounded-xl border border-white/10">
+          Tech Stack
+        </div>
+      </div>
+
+      <!-- Modal Action Buttons -->
+      <div class="pt-2 flex justify-end gap-2">
+        <a id="modal-link" href="#" target="_blank" class="hidden px-4 py-2 rounded-xl theme-bg text-slate-950 text-xs font-bold transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Kunjungi / Coba
+        </a>
+        <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700 transition-all">
+          Tutup
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+
+  <!-- JAVASCRIPT LOGIC & INTERACTION -->
   <script>
-    document.getElementById("helloButton")
-      .addEventListener("click", () => {
-        document.getElementById("message").textContent =
-          "Halo! Terima kasih sudah berkunjung 🚀";
+    /* ==========================================================================
+       1. THEME SWITCHER & STATE MANAGEMENT
+       ========================================================================== */
+    function setTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      showToast(`Tema diubah ke ${themeName.toUpperCase()}`, 'fa-palette');
+      // Update Canvas accent colors dynamically
+      if (window.updateCanvasColors) window.updateCanvasColors();
+    }
+
+    // Dynamic Year
+    document.getElementById('year-text').textContent = new Date().getFullYear();
+
+
+    /* ==========================================================================
+       2. TYPEWRITER ANIMATION EFFECT
+       ========================================================================== */
+    const typewriterPhrases = [
+      "Digital Explorer 🚀",
+      "Creative Web Builder 💻",
+      "Audio & Synth Enthusiast 🎵",
+      "Lifelong Tech Learner ⚡"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriterElement = document.getElementById('typewriter');
+
+    function typeEffect() {
+      const currentPhrase = typewriterPhrases[phraseIndex];
+      
+      if (isDeleting) {
+        typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        typeSpeed = 2000; // Pause at end of sentence
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % typewriterPhrases.length;
+        typeSpeed = 400;
+      }
+
+      setTimeout(typeEffect, typeSpeed);
+    }
+    window.addEventListener('DOMContentLoaded', typeEffect);
+
+
+    /* ==========================================================================
+       3. 3D TILT EFFECT ON HERO CARD (Mouse & Touch)
+       ========================================================================== */
+    const heroCard = document.getElementById('hero-card');
+
+    function handleMove(e) {
+      const rect = heroCard.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -8; // Max 8 deg rotation
+      const rotateY = ((x - centerX) / centerX) * 8;
+
+      heroCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+    }
+
+    function resetTilt() {
+      heroCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    }
+
+    heroCard.addEventListener('mousemove', handleMove);
+    heroCard.addEventListener('mouseleave', resetTilt);
+    heroCard.addEventListener('touchmove', handleMove);
+    heroCard.addEventListener('touchend', resetTilt);
+
+
+    /* ==========================================================================
+       4. INTERACTIVE BACKGROUND CANVAS (Particle Constellation Network)
+       ========================================================================== */
+    const bgCanvas = document.getElementById('bg-canvas');
+    const bgCtx = bgCanvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null, radius: 120 };
+
+    function resizeBgCanvas() {
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+      initParticles();
+    }
+
+    window.addEventListener('resize', resizeBgCanvas);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    window.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      }
+    });
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * bgCanvas.width;
+        this.y = Math.random() * bgCanvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > bgCanvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > bgCanvas.height) this.vy *= -1;
+
+        // Interaction with mouse
+        if (mouse.x !== null && mouse.y !== null) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            this.x -= (dx / dist) * 1.5;
+            this.y -= (dy / dist) * 1.5;
+          }
+        }
+      }
+
+      draw() {
+        bgCtx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        bgCtx.beginPath();
+        bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        bgCtx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = Math.floor((bgCanvas.width * bgCanvas.height) / 12000);
+      for (let i = 0; i < Math.min(count, 90); i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateBgCanvas() {
+      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+
+        // Connect nearby particles
+        for (let j = i + 1; j < particles.length; j++) {
+          let dx = particles[i].x - particles[j].x;
+          let dy = particles[i].y - particles[j].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 110) {
+            bgCtx.strokeStyle = `rgba(255, 255, 255, ${0.15 - distance / 1100})`;
+            bgCtx.lineWidth = 0.8;
+            bgCtx.beginPath();
+            bgCtx.moveTo(particles[i].x, particles[i].y);
+            bgCtx.lineTo(particles[j].x, particles[j].y);
+            bgCtx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateBgCanvas);
+    }
+
+    resizeBgCanvas();
+    animateBgCanvas();
+
+
+    /* ==========================================================================
+       5. PARTICLE BURST EFFECT ON BUTTON CLICK
+       ========================================================================== */
+    const burstCanvas = document.getElementById('burst-canvas');
+    const burstCtx = burstCanvas.getContext('2d');
+    let burstParticles = [];
+
+    function resizeBurstCanvas() {
+      burstCanvas.width = window.innerWidth;
+      burstCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeBurstCanvas);
+    resizeBurstCanvas();
+
+    function triggerBurst(x, y) {
+      const colors = ['#3b82f6', '#06b6d4', '#a855f7', '#10b981', '#f59e0b'];
+      for (let i = 0; i < 24; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 5 + 2;
+        burstParticles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          radius: Math.random() * 3 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          decay: Math.random() * 0.03 + 0.02
+        });
+      }
+    }
+
+    function animateBurst() {
+      burstCtx.clearRect(0, 0, burstCanvas.width, burstCanvas.height);
+      for (let i = burstParticles.length - 1; i >= 0; i--) {
+        let p = burstParticles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= p.decay;
+
+        if (p.alpha <= 0) {
+          burstParticles.splice(i, 1);
+          continue;
+        }
+
+        burstCtx.save();
+        burstCtx.globalAlpha = p.alpha;
+        burstCtx.fillStyle = p.color;
+        burstCtx.beginPath();
+        burstCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        burstCtx.fill();
+        burstCtx.restore();
+      }
+      requestAnimationFrame(animateBurst);
+    }
+    animateBurst();
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.particle-btn') || e.target.closest('.synth-key')) {
+        triggerBurst(e.clientX, e.clientY);
+      }
+    });
+
+
+    /* ==========================================================================
+       6. WEB AUDIO API SYNTHESIZER & REAL-TIME SPECTRUM VISUALIZER
+       ========================================================================== */
+    let audioCtx = null;
+    let analyserNode = null;
+    let currentOscillatorType = 'sine';
+    let ambientInterval = null;
+    let isAmbientPlaying = false;
+
+    // Visualizer Canvas Setup
+    const visCanvas = document.getElementById('visualizer-canvas');
+    const visCtx = visCanvas.getContext('2d');
+
+    function resizeVisCanvas() {
+      if (visCanvas.parentElement) {
+        visCanvas.width = visCanvas.parentElement.clientWidth;
+        visCanvas.height = visCanvas.parentElement.clientHeight;
+      }
+    }
+    window.addEventListener('resize', resizeVisCanvas);
+    setTimeout(resizeVisCanvas, 100);
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        analyserNode = audioCtx.createAnalyser();
+        analyserNode.fftSize = 64;
+        analyserNode.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function setSynthWave(type) {
+      currentOscillatorType = type;
+      ['sine', 'triangle', 'square'].forEach(w => {
+        const btn = document.getElementById(`wave-${w}`);
+        if (w === type) {
+          btn.className = "px-2.5 py-1 rounded-lg bg-slate-800 theme-text font-medium text-[11px]";
+        } else {
+          btn.className = "px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 font-medium text-[11px]";
+        }
       });
+      showToast(`Gelombang Synth: ${type.toUpperCase()}`, 'fa-sliders');
+    }
+
+    function playSynthNote(freq, noteName, event) {
+      initAudioContext();
+      
+      // Hide hint text on first note
+      const hint = document.getElementById('visualizer-hint');
+      if (hint) hint.style.opacity = '0';
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = currentOscillatorType;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      // Envelope: Attack & Decay
+      gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+
+      osc.connect(gain);
+      gain.connect(analyserNode);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 1.25);
+
+      // UI Feedback on button
+      if (event && event.currentTarget) {
+        const btn = event.currentTarget;
+        btn.classList.add('active');
+        setTimeout(() => btn.classList.remove('active'), 200);
+      }
+    }
+
+    // Generative Ambient Sound Loop
+    const ambientScale = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25]; // Pentatonic C
+    function toggleAmbientLoop(event) {
+      initAudioContext();
+      const hint = document.getElementById('visualizer-hint');
+      if (hint) hint.style.opacity = '0';
+
+      const btnText = document.getElementById('ambient-text');
+      const btnIcon = document.getElementById('ambient-icon');
+
+      if (isAmbientPlaying) {
+        clearInterval(ambientInterval);
+        isAmbientPlaying = false;
+        btnText.textContent = "Putar Ambient Chill Loop";
+        btnIcon.className = "fa-solid fa-play text-emerald-400";
+        showToast("Ambient Loop Dihentikan", 'fa-pause');
+      } else {
+        isAmbientPlaying = true;
+        btnText.textContent = "Hentikan Ambient Loop";
+        btnIcon.className = "fa-solid fa-square text-rose-400";
+        showToast("Ambient Chords Dimulai...", 'fa-music');
+
+        ambientInterval = setInterval(() => {
+          const randomFreq = ambientScale[Math.floor(Math.random() * ambientScale.length)];
+          playSynthNote(randomFreq, 'Ambient');
+        }, 600);
+      }
+    }
+
+    // Audio Visualizer Canvas Render Loop
+    let idleAngle = 0;
+    function renderVisualizer() {
+      requestAnimationFrame(renderVisualizer);
+
+      visCtx.clearRect(0, 0, visCanvas.width, visCanvas.height);
+
+      if (!analyserNode) {
+        // Draw idling sine wave if no audio initialized
+        visCtx.beginPath();
+        visCtx.lineWidth = 2;
+        visCtx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        idleAngle += 0.04;
+        for (let x = 0; x < visCanvas.width; x += 5) {
+          let y = visCanvas.height / 2 + Math.sin(x * 0.02 + idleAngle) * 12;
+          if (x === 0) visCtx.moveTo(x, y);
+          else visCtx.lineTo(x, y);
+        }
+        visCtx.stroke();
+        return;
+      }
+
+      const bufferLength = analyserNode.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyserNode.getByteFrequencyData(dataArray);
+
+      const barWidth = (visCanvas.width / bufferLength) * 1.8;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        let barHeight = (dataArray[i] / 255) * visCanvas.height * 0.85;
+
+        // Fallback subtle movement
+        if (barHeight < 4) barHeight = Math.sin(i + idleAngle) * 4 + 6;
+
+        const gradient = visCtx.createLinearGradient(0, visCanvas.height, 0, 0);
+        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.2)');
+        gradient.addColorStop(0.5, 'rgba(6, 182, 212, 0.8)');
+        gradient.addColorStop(1, 'rgba(168, 85, 247, 1)');
+
+        visCtx.fillStyle = gradient;
+        visCtx.fillRect(x, visCanvas.height - barHeight, barWidth - 3, barHeight);
+
+        x += barWidth;
+      }
+      idleAngle += 0.05;
+    }
+    renderVisualizer();
+
+
+    /* ==========================================================================
+       7. SHOWCASE FILTER & MODAL POPUP
+       ========================================================================== */
+    function filterShowcase(category) {
+      const cards = document.querySelectorAll('.showcase-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => {
+        btn.className = "filter-btn px-3 py-1.5 rounded-xl text-slate-400 hover:text-slate-200 font-semibold transition-all";
+      });
+
+      const activeBtn = document.getElementById(`filter-${category}`);
+      if (activeBtn) {
+        activeBtn.className = "filter-btn active px-3 py-1.5 rounded-xl theme-bg text-slate-950 font-bold transition-all";
+      }
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    const modal = document.getElementById('detail-modal');
+    const modalContent = document.getElementById('modal-content');
+
+    function openModal(title, desc, tech, link) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('modal-tech').textContent = tech;
+
+      const linkBtn = document.getElementById('modal-link');
+      if (link && link !== '#sound-lab') {
+        linkBtn.href = link;
+        linkBtn.classList.remove('hidden');
+      } else if (link === '#sound-lab') {
+        linkBtn.href = '#sound-lab';
+        linkBtn.onclick = () => closeModal();
+        linkBtn.classList.remove('hidden');
+      } else {
+        linkBtn.classList.add('hidden');
+      }
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-95');
+      modalContent.classList.add('scale-100');
+    }
+
+    function closeModal() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+
+    /* ==========================================================================
+       8. UTILITY: FLOATING TOAST NOTIFICATION & COPY ACTION
+       ========================================================================== */
+    function showToast(message, iconClass = 'fa-circle-check') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+
+      toast.className = "glass-card px-4 py-3 rounded-2xl text-xs font-semibold text-slate-100 border border-white/20 shadow-2xl flex items-center gap-2.5 transform translate-y-4 opacity-0 transition-all duration-300 pointer-events-auto";
+      toast.innerHTML = `<i class="fa-solid ${iconClass} theme-text text-sm"></i> <span>${message}</span>`;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    function copyCurrentURL(event) {
+      const textToCopy = "https://ibnugisan.my.id";
+      
+      // ExecCommand fallback for iframe / strict browser support
+      const tempInput = document.createElement("input");
+      tempInput.value = textToCopy;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      showToast("Link ibnugisan.my.id disalin!", "fa-link");
+    }
+
+    function copyEmail(event) {
+      const email = "contact@ibnugisan.my.id";
+      const tempInput = document.createElement("input");
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      showToast("Alamat Email disalin ke clipboard!", "fa-envelope");
+    }
   </script>
 </body>
 </html>
